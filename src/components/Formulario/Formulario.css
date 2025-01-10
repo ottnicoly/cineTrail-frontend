@@ -1,0 +1,32 @@
+.formulario {
+    background-color: rgb(0, 0, 0,0.7);
+    width: 400px;
+    height: 450px;
+    border-radius: 6px;
+}
+
+form h2 {
+    font-size: 36px;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+    padding-left: 40px;
+    padding-top: 35px;
+}
+
+.botao{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+button {
+    width: 314px;
+    height: 48px;
+    border-radius: 6px;
+    background-color: #F63346;
+    border: solid 1px #F63346;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+}
