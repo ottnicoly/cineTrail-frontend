@@ -12,6 +12,7 @@ import {
 import Home from "./pages/Home/Home.jsx"
 import Login from "./pages/Login/Login.jsx"
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx"
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <ProtectedRoute> <Home /> </ProtectedRoute>
       },
       {
         path:"login",

@@ -1,0 +1,17 @@
+.container {
+    height: 100vh;
+    
+}
+
+.filme-lista {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none
+}
+
+.filme-poster {
+    height: 100px;
+    width: 50px;
+}
+
+
