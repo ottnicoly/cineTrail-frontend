@@ -1,4 +1,4 @@
-import Formulario from '../components/Formulario/Formulario'
+import Formulario from '../../components/Formulario/Formulario'
 import './Login.css'
 
 const Login = () => {

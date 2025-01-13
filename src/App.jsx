@@ -1,11 +1,14 @@
-
-import Login from './pages/Login'
+// reaproveitamente de estrutura
+import { Outlet } from "react-router-dom"
+import Navegacao from "./components/Navegacao/Navegacao"
 
 function App() {
 
   return (
     <>
-      <Login />
+      <Navegacao />
+      <Outlet />
+      <h1>footer</h1>
     </>
   )
 }
