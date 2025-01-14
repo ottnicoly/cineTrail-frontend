@@ -1,0 +1,15 @@
+.registro{
+    background-image: url('../../assets/images/background-image.jpg');
+    background-size: cover;
+    font-family: 'Titillium Web', serif;
+    margin: 0;
+    padding: 0;
+}
+
+.form-registro {
+    display: flex;
+    background-color: rgb(0, 0, 0,0.5);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

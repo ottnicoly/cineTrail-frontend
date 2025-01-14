@@ -2,11 +2,16 @@
 import CampoTexto from '../CampoTexto/CampoTexto'
 import './Navegacao.css'
 
-const Navegacao = () => {
+const Navegacao = ({ search, setSearch }) => {
     return (
         <nav className="navbar">
             <h1 className="page-title">CineTrail</h1>
-            <CampoTexto />
+            <CampoTexto 
+                tipo="text"
+                nome="Pesquise um filme..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)} 
+            />
         </nav>
     )
 }

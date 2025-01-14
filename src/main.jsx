@@ -4,7 +4,6 @@ import './index.css'
 import App from './App.jsx'
 
 // configurando router
-
 import {
   createBrowserRouter, RouterProvider
 } from "react-router-dom"
@@ -13,6 +12,7 @@ import Login from "./pages/Login/Login.jsx"
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx"
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
 import ListaFilme from './pages/ListaFilmes/ListaFilmes.jsx'
+import Registro from './pages/Registro/Registro.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path:"login",
         element: <Login />
+      },
+      {
+        path:"registro",
+        element: <Registro />
       }
     ]
   }
