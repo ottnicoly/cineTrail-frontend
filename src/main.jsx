@@ -9,10 +9,10 @@ import {
   createBrowserRouter, RouterProvider
 } from "react-router-dom"
 
-import Home from "./pages/Home/Home.jsx"
 import Login from "./pages/Login/Login.jsx"
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx"
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
+import ListaFilme from './pages/ListaFilmes/ListaFilmes.jsx'
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <ProtectedRoute> <Home /> </ProtectedRoute>
+        element: <ProtectedRoute> <ListaFilme /> </ProtectedRoute>
       },
       {
         path:"login",

@@ -1,0 +1,11 @@
+.lista-filme {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 70px;
+    list-style: nome;
+    width: 100%;
+    padding: 12px 6%;
+    background-color: #000;
+}
+
+

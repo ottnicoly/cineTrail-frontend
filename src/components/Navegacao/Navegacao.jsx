@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
+import CampoTexto from '../CampoTexto/CampoTexto'
+import './Navegacao.css'
 
 const Navegacao = () => {
     return (
-        <nav>
-            <Link to={"/"}>Home</Link>
-            <Link to={"/login"}>Login</Link>
+        <nav className="navbar">
+            <h1 className="page-title">CineTrail</h1>
+            <CampoTexto />
         </nav>
     )
 }

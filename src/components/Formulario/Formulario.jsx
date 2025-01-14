@@ -2,9 +2,6 @@ import './Formulario.css'
 import CampoTexto from '../CampoTexto/CampoTexto'
 
 const Formulario = (props) => {
-
-
-
     return (
         <div className='formulario'>
             <form onSubmit={props.onSubmit}>
