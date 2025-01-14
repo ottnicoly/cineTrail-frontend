@@ -1,0 +1,9 @@
+.movie-rate {
+    display: flex;
+    gap: 4px;
+    color: #fff;
+}
+
+.movie-rate :nth-child(1) {
+    color: #f3eb00;
+}

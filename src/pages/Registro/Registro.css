@@ -11,5 +11,12 @@
     background-color: rgb(0, 0, 0,0.5);
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
+}
+
+.link-login {
+    color: #fff;
+    position: absolute;
+    bottom: 280px;
 }

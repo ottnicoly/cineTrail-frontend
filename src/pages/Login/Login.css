@@ -12,7 +12,20 @@
 .form-login {
     display: flex;
     background-color: rgb(0, 0, 0,0.5);
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.mensagem-erro {
+    color: #F63346;
+    position: absolute;
+    top: 345px;
+}
+
+.link-registro {
+    color: #fff;
+    position: absolute;
+    bottom: 280px;
 }

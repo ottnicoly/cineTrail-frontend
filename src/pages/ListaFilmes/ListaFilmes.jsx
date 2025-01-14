@@ -44,7 +44,8 @@ const ListaFilme = () => {
             <ul className='lista-filme'>
                 {filmes.map(filme =>
                     <FilmeCard
-                        key={filme.id}
+                        key={filme.idTmdb}
+                        idTmdb={filme.idTmdb}
                         id={filme.id}
                         name={filme.name}
                         overview={filme.overview}

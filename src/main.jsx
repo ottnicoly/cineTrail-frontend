@@ -13,6 +13,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx"
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
 import ListaFilme from './pages/ListaFilmes/ListaFilmes.jsx'
 import Registro from './pages/Registro/Registro.jsx'
+import FilmeDetails from './pages/FilmeDetails/FilmeDetails.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path:"registro",
         element: <Registro />
+      },
+      {
+        path:"filme/:id",
+        element: <FilmeDetails />
       }
     ]
   }
