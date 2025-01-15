@@ -1,0 +1,61 @@
+.movie-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 90px;
+
+}
+
+.poster {
+    border: solid 2px #fff;
+}
+
+.infos {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    height: 400px;
+}
+
+.infos h1 {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.infos-fav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.infos button {
+    width: 200px;
+    margin-top: 40px;
+}
+
+.movie-overview {
+    width: 600px;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.movie-genres {
+    font-size: 18px;
+}
+
+.movie-runtime {
+    margin-bottom: 20px;
+}
+
+.movie-rating {
+    padding: 5px 0;
+}
+
+.movie-return {
+    margin: 0 100px;
+}
+
+
+
+
+

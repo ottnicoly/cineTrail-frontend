@@ -1,0 +1,17 @@
+body {
+    height: 100vh;
+    background-color: #000;
+}
+
+.favorite-movie {
+    padding: 12px 6%;
+}
+
+.favorite-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 70px;
+    list-style: nome;
+    width: 100%;
+    padding: 12px 6%;
+}

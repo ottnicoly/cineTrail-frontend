@@ -18,13 +18,13 @@
     height: 100vh;
 }
 
-.mensagem-erro {
+.error-message {
     color: #F63346;
     position: absolute;
     top: 345px;
 }
 
-.link-registro {
+.link-register {
     color: #fff;
     position: absolute;
     bottom: 280px;

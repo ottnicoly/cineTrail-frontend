@@ -3,7 +3,7 @@ body {
     background-color: #000;
 }
 
-.lista-filme {
+.movie-list {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 70px;

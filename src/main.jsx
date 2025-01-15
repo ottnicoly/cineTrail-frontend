@@ -11,9 +11,10 @@ import {
 import Login from "./pages/Login/Login.jsx"
 import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx"
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
-import ListaFilme from './pages/ListaFilmes/ListaFilmes.jsx'
-import Registro from './pages/Registro/Registro.jsx'
-import FilmeDetails from './pages/FilmeDetails/FilmeDetails.jsx'
+import MovieList from './pages/MovieList/MovieList.jsx'
+import Register from './pages/Register/Register.jsx'
+import MovieDetails from './pages/MovieDetails/MovieDetails.jsx'
+import FavoriteList from './pages/FavoriteList/FavoriteList.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,19 +24,23 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <ProtectedRoute> <ListaFilme /> </ProtectedRoute>
+        element: <ProtectedRoute> <MovieList /> </ProtectedRoute>
       },
       {
         path:"login",
         element: <Login />
       },
       {
-        path:"registro",
-        element: <Registro />
+        path:"register",
+        element: <Register />
       },
       {
-        path:"filme/:id",
-        element: <FilmeDetails />
+        path:"movie/:id",
+        element: <MovieDetails />
+      },
+      {
+        path:"favorite",
+        element: <FavoriteList />
       }
     ]
   }

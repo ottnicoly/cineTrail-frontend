@@ -10,3 +10,13 @@
 .page-title {
     color: #fff;
 }
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.filter-fav {
+    padding: 0 20px;
+}

@@ -1,4 +1,4 @@
-import Formulario from '../../components/Formulario/Formulario'
+import Form from '../../components/Form/Form'
 import React, { useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
@@ -27,17 +27,17 @@ const Login = () => {
     return (
         <div className='login'>
             <div className='form-login'>
-            {error && <p className="mensagem-erro">{error}</p>}
-            <Formulario 
+            {error && <p className="error-message">{error}</p>}
+            <Form 
             onSubmit={handleSubmit}
-            nomeFormulario='Login'
-            nomeBotao='Entrar'
+            formName='Login'
+            buttonName='Entrar'
             loginValue={login}
             onLoginChange={(e) => setLogin(e.target.value)}
-            senhaValue={password}
-            onSenhaChange={(e) => setPassword(e.target.value)}
+            passwordValue={password}
+            onPasswordChange={(e) => setPassword(e.target.value)}
             />
-            <Link className='link-registro' to={"/registro"}>Registrar-se</Link>
+            <Link className='link-register' to={"/register"}>Registrar-se</Link>
             </div>
         </div> 
     )

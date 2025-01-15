@@ -1,14 +1,14 @@
-.campo-texto {
+.text-field {
     display: flex;
     flex-direction: column;
     padding: 10px;
 }
 
-.campo-texto label {
+.text-field label {
     color: #8C8C8C;
 }
 
-.teste {
+.container {
     display: flex;
     justify-content: center;
 }

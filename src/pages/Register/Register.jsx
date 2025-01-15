@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import Formulario from '../../components/Formulario/Formulario';
-import './Registro.css';
+import Form from '../../components/Form/Form'
+import './Register.css';
 import api from '../../services/api';
 import React, { useState } from "react";
 import { Link } from "react-router-dom"
 
-const Registro = () => {
+const Register = () => {
 
     const [password, setPassword] = useState("");
     const [login, setLogin] = useState("");
@@ -25,17 +25,17 @@ const Registro = () => {
     }
 
     return (
-        <div className='registro'>
-            <div className='form-registro'>
-                {error && <p className="mensagem-erro">{error}</p>}
-                <Formulario 
+        <div className='register'>
+            <div className='form-register'>
+                {error && <p className="error-message">{error}</p>}
+                <Form
                     onSubmit={handleSubmit}
-                    nomeFormulario='Registre-se'
-                    nomeBotao='Concluir'
+                    formName='Registre-se'
+                    buttonName='Concluir'
                     loginValue={login}
                     onLoginChange={(e) => setLogin(e.target.value)}
-                    senhaValue={password}
-                    onSenhaChange={(e) => setPassword(e.target.value)}
+                    passwordValue={password}
+                    onPasswordChange={(e) => setPassword(e.target.value)}
                 />
                 <Link className='link-login' to={"/login"}>Entrar</Link>
             </div>
@@ -43,4 +43,4 @@ const Registro = () => {
     );
 }
 
-export default Registro;
+export default Register;
