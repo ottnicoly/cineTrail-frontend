@@ -4,8 +4,10 @@ import api from '../../services/api'
 import { useParams } from 'react-router-dom'
 import StarRating from '../../components/StarRating/StarRating';
 import Favorite from '../../components/Favorite/Favorite';
-
 import { Link } from "react-router-dom"
+import { FaArrowLeft } from "react-icons/fa";
+import NavBar from '../../components/NavBar/NavBar';
+
 
 const MovieDetails = (props) => {
 
@@ -27,15 +29,14 @@ const MovieDetails = (props) => {
             setError("Erro ao carregar filmes. Tente novamente.");
         }
     }
+    
     useEffect(() => {
         getFilme(id);
     }, []);
 
     return (
         <div>
-            <nav className="navbar">
-            <h1 className="page-title">CineTrail</h1>
-            </nav>
+            <NavBar />
             <div className='movie-details'>
 
                 <Link className='movie-return' to="/"><FaArrowLeft /></Link>

@@ -10,17 +10,18 @@ const Favorite = (props) => {
     const [category, setCategory] = useState("WATCHED")
     const [error, setError] = useState("")
     const [idTmdb, setIdTmdb] = useState("")
+
     const [isFavorite, setIsFavorite] = useState(false)
 
-    //se props.idTmdb for assíncrono ou se for passado como undefined inicialmente. 
-    // usar um useEffect para sincronizar o estado de idTmdb com props.idTmdb, garantindo que ele seja atualizado quando props.idTmdb mudar.
+    // sincronizar o estado de idTmdb com props.idTmdb, para que ele seja atualizado sempre que props.idTmdb mudar.
     useEffect(() => {
         if (props.idTmdb) {
             setIdTmdb(props.idTmdb);
         }
     }, [props.idTmdb]);
 
-    const favorite = async (e) => {
+
+    const favoriteSave = async (e) => {
         e.preventDefault();
         console.log(`enviando dados - id: ${idTmdb} / category:${category}`)
         try {
@@ -31,9 +32,10 @@ const Favorite = (props) => {
                 },
             });
             setIsFavorite(true)
+          
             console.log("Resposta do servidor: ", response);
         } catch (err) {
-            setError("erro");
+            setError("Este filme já está como favorito");
         }
     }
 
@@ -48,9 +50,10 @@ const Favorite = (props) => {
                 },
             })
             console.log("excluido")
+            
             setIsFavorite(false)
         } catch (err) {
-            setError("erro ao excluir")
+            setError("filme não encontrado")
         }
     }
 
@@ -59,9 +62,9 @@ const Favorite = (props) => {
             <IconContext.Provider value={{ size: 20 }}>
                 <div className='favorite-icons'>
                     {isFavorite ? (
-                        <FaHeart className='favorite-delete' onClick={favoriteDelete} />
+                        <FaHeart className='favorite-delete' onClick={favoriteDelete}/>
                     ) : (
-                        <FaRegHeart onClick={favorite} />
+                        <FaRegHeart onClick={favoriteSave} />
                     )}
                 </div>
             </IconContext.Provider>

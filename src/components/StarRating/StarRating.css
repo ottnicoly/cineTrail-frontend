@@ -2,6 +2,7 @@
     display: flex;
     gap: 4px;
     color: #fff;
+    margin-bottom: 9px;
 }
 
 .movie-rate :nth-child(1) {

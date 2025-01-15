@@ -14,7 +14,8 @@
     cursor: pointer;
 }
 
-.favorite-delete {
+.favorite-icons .favorite-delete :nth-child(1) {
+    color: #ff0000;
     position: absolute;
     right: 10px;
 }

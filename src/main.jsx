@@ -36,11 +36,11 @@ const router = createBrowserRouter([
       },
       {
         path:"movie/:id",
-        element: <MovieDetails />
+        element: <ProtectedRoute> <MovieDetails /> </ProtectedRoute>
       },
       {
         path:"favorite",
-        element: <FavoriteList />
+        element: <ProtectedRoute> <FavoriteList /> </ProtectedRoute> 
       }
     ]
   }

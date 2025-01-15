@@ -28,7 +28,7 @@ const MovieList = () => {
 
     useEffect(() => {
         getMovies();
-    }, []);
+    }, []); //executa ao montar o componente
 
     useEffect(() => {
         if (search) {
@@ -36,7 +36,9 @@ const MovieList = () => {
         } else {
             getMovies(); 
         }
-    }, [search]); // A pesquisa é realizada sempre que o `search` mudar
+    }, [search]); // executa sempre que o `search` mudar
+
+ 
 
     return (
         <div>

@@ -10,15 +10,15 @@ const Form = (props) => {
                 label= 'Usuário:'
                 name='Digite seu usuário:'
                 type='text'
-                required = 'true'
+                required = {true}
                 value={props.loginValue}
                 onChange={props.onLoginChange}
                 />
                 <TextField
                 label= 'Senha:'
                 name='Digite sua senha:'
-                typo='password'
-                required = 'true'
+                type='password'
+                required = {true}
                 value={props.passwordValue}
                 onChange={props.onPasswordChange}
                 />
