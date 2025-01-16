@@ -11,7 +11,7 @@ const Favorite = (props) => {
     const [error, setError] = useState("")
     const [idTmdb, setIdTmdb] = useState("")
 
-    const [isFavorite, setIsFavorite] = useState(false)
+    const [isFavorite, setIsFavorite] = useState(props.favorite)
 
     // sincronizar o estado de idTmdb com props.idTmdb, para que ele seja atualizado sempre que props.idTmdb mudar.
     useEffect(() => {
@@ -52,7 +52,7 @@ const Favorite = (props) => {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            console.log("excluido")
+            console.log("Resposta do servidor: ", response);
             props.onFavoriteUpdate(idTmdb, false);
             setIsFavorite(false)
         } catch (err) {

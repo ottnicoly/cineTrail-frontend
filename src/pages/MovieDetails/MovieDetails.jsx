@@ -15,7 +15,6 @@ const MovieDetails = (props) => {
     const [error, setError] = useState("")
     const { id } = useParams();
     
-
     const getMovie = async (id) => {
         try {
             const token = localStorage.getItem('token')
@@ -39,6 +38,7 @@ const MovieDetails = (props) => {
         <div>
             <NavBar />
             <div className='movie-details'>
+                <Link className='movie-return' to="/"><FaArrowLeft /></Link>
                 <div className='poster'>
                     <img src={`https://image.tmdb.org/t/p/w400${movie.poster}`} alt={movie.name} />
                 </div>
@@ -47,7 +47,6 @@ const MovieDetails = (props) => {
 
                     <div className='infos-fav'>
                         <h1>{movie.name}</h1>
-                        <Favorite idTmdb={movie.idTmdb} />
                     </div>
 
                     <div className='movie-rating' >

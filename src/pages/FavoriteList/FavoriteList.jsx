@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 import './FavoriteList.css'
-import { FaArrowLeft } from "react-icons/fa";
 import api from '../../services/api'
 import MovieCard from '../../components/MovieCard/MovieCard'
-import { Link } from "react-router-dom"
 import NavBar from '../../components/NavBar/NavBar';
 import { CgSmileSad } from "react-icons/cg";
 import { IconContext } from "react-icons";
@@ -22,7 +20,6 @@ const FavoriteList = () => {
                 },
             })
             setMovies(response.data)
-            // console.log('Resposta da API:', response.data);
         } catch (err) {
             setError("Você não possui filmes favoritos!");
             setMovies([]);
@@ -35,19 +32,14 @@ const FavoriteList = () => {
 
     // CALLBACK - atualiza o estado dos filmes sempre que o favorito muda
     const handleFavoriteUpdate = (idTmdb, isFavorite) => {
-        //verifica se o idTmdb de cada filme é igual ao idTmdb que foi passado como argumento.
+        // Atualizando o estado de 'movies' quando o status de favorito mudar
         setMovies(prevMovies =>
             prevMovies.map(movie =>
-                movie.idTmdb === idTmdb ? { ...movie, favorite: isFavorite } : movie //spread operator - preserva as propriedades do filme
+                movie.idTmdb === idTmdb ? { ...movie, favorite: isFavorite } : movie
             )
-        );
-        refreshMovies()
+        ); 
     };
-
-    const refreshMovies = async () => {
-        await getMovies();
-    };
-
+    
     return (
         <div>
             <NavBar />
