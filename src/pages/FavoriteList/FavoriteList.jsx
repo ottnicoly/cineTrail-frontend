@@ -11,14 +11,14 @@ const FavoriteList = () => {
     const [movies, setMovies] = useState([])
     const [error, setError] = useState("")
 
-    const getMovies = async () => {
+    const getFavoriteMovies = async () => {
         try {
             const token = localStorage.getItem('token')
             const response = await api.get(`/favorite`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-            })
+            })    
             setMovies(response.data)
         } catch (err) {
             setError("Você não possui filmes favoritos!");
@@ -27,7 +27,7 @@ const FavoriteList = () => {
     }
 
     useEffect(() => {
-        getMovies();
+        getFavoriteMovies();
     }, []);
 
     // CALLBACK - atualiza o estado dos filmes sempre que o favorito muda
@@ -39,7 +39,7 @@ const FavoriteList = () => {
             )
         ); 
     };
-    
+
     return (
         <div>
             <NavBar />
