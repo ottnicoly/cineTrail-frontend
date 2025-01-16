@@ -19,7 +19,10 @@ const Favorite = (props) => {
             setIdTmdb(props.idTmdb);
         }
     }, [props.idTmdb]);
-
+    
+    useEffect(() => {
+        setIsFavorite(props.favorite);
+    }, [props.favorite]);
 
     const favoriteSave = async (e) => {
         e.preventDefault();
@@ -32,7 +35,7 @@ const Favorite = (props) => {
                 },
             });
             setIsFavorite(true)
-          
+            props.onFavoriteUpdate(idTmdb, true); //informa que o filme foi adicionado aos favoritos
             console.log("Resposta do servidor: ", response);
         } catch (err) {
             setError("Este filme já está como favorito");
@@ -50,7 +53,7 @@ const Favorite = (props) => {
                 },
             })
             console.log("excluido")
-            
+            props.onFavoriteUpdate(idTmdb, false);
             setIsFavorite(false)
         } catch (err) {
             setError("filme não encontrado")

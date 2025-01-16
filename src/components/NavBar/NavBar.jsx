@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom"
 import { FaRegHeart } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import Logout from '../Logout/Logout';
-
+import { TiHomeOutline } from "react-icons/ti";
 
 const NavBar = ({ search, setSearch }) => {
 
@@ -28,7 +28,8 @@ const NavBar = ({ search, setSearch }) => {
 
                     </>}
                 <IconContext.Provider value={{ size: 25 }}>
-                    <Link className='filter-fav' to='/favorite'> <FaRegHeart /> </Link>
+                    <Link className='home-icon' to={"/"}><TiHomeOutline /></Link>
+                    <Link className='fav-icon' to='/favorite'> <FaRegHeart /> </Link>
                 </IconContext.Provider>
                 <Logout />
             </div>

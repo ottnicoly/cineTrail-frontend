@@ -8,10 +8,10 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 
 .favorite-list {
-    color: aliceblue;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 70px;
@@ -20,6 +20,13 @@ body {
     padding: 12px 6%;
 }
 
-.return {
-    padding-right: 50px;
+.message-error p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.sad-icon {
+    margin-left: 10px;
 }

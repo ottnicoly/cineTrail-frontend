@@ -14,8 +14,9 @@ const MovieDetails = (props) => {
     const [movie, setMovie] = useState("")
     const [error, setError] = useState("")
     const { id } = useParams();
+    
 
-    const getFilme = async (id) => {
+    const getMovie = async (id) => {
         try {
             const token = localStorage.getItem('token')
             const url = `/query/id/${id}`;
@@ -31,16 +32,13 @@ const MovieDetails = (props) => {
     }
     
     useEffect(() => {
-        getFilme(id);
+        getMovie(id);
     }, []);
 
     return (
         <div>
             <NavBar />
             <div className='movie-details'>
-
-                <Link className='movie-return' to="/"><FaArrowLeft /></Link>
-
                 <div className='poster'>
                     <img src={`https://image.tmdb.org/t/p/w400${movie.poster}`} alt={movie.name} />
                 </div>

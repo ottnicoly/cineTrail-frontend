@@ -5,11 +5,6 @@ import Favorite from '../Favorite/Favorite';
 
 const MovieCard = (props) => {
 
-    console.log("MovieCard props:", props);
-
-    const favoritoTeste = props.favorite
-    console.log(`FAVORITO? ` + favoritoTeste)
-
     return (
         <li className='movie-card' >
             <div className='movie-poster'>
@@ -18,7 +13,9 @@ const MovieCard = (props) => {
             <div className='movie-info'>
                 <div className='movie-fav'>
                     <Favorite
-                        idTmdb={props.idTmdb} />
+                        favorite = {props.favorite}
+                        idTmdb={props.idTmdb}
+                        onFavoriteUpdate={props.onFavoriteUpdate} />
                     <h1 className='movie-title'>{props.name}</h1>
                 </div>
                 <div className='hidden-content'>

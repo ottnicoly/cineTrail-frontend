@@ -18,6 +18,10 @@
     align-items: center;
 }
 
-.filter-fav {
-    padding: 0 20px;
+.fav-icon {
+    padding: 0 10px;
+}
+
+.home-icon {
+    padding: 0 10px;
 }

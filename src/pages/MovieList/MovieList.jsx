@@ -8,6 +8,7 @@ const MovieList = () => {
     const [movies, setMovies] = useState([])
     const [error, setError] = useState("")
     const [search, setSearch] = useState("")
+    const [favoriteMovies, setFavoriteMovies] = useState([])
 
     const getMovies = async (query = "") => {
         try {
@@ -26,8 +27,24 @@ const MovieList = () => {
         }
     };
 
+    const getFavoriteMovies = async () => {
+        try {
+            const token = localStorage.getItem('token')
+            const response = await api.get("/favorite", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            setFavoriteMovies(response.data); 
+            console.log("Filmes favoritos: ", response.data)
+        } catch (err) {
+            console.error("Erro ao carregar filmes favoritos", err)
+        }
+    }
+
     useEffect(() => {
         getMovies();
+        getFavoriteMovies();
     }, []); //executa ao montar o componente
 
     useEffect(() => {
@@ -37,8 +54,6 @@ const MovieList = () => {
             getMovies(); 
         }
     }, [search]); // executa sempre que o `search` mudar
-
- 
 
     return (
         <div>
