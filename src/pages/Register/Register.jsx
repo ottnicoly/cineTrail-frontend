@@ -4,13 +4,20 @@ import './Register.css';
 import api from '../../services/api';
 import React, { useState } from "react";
 import { Link } from "react-router-dom"
+import { useReducer } from 'react';
+
+const initialState = {
+    password: "",
+    login: "",
+    error: "",
+    role: "USER",
+}
+
+
 
 const Register = () => {
 
-    const [password, setPassword] = useState("");
-    const [login, setLogin] = useState("");
-    const [error, setError] = useState("");
-    const [role, setRole] = useState("USER")
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {

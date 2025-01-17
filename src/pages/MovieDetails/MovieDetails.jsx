@@ -1,38 +1,53 @@
 import { useEffect, useState } from 'react'
 import './MovieDetails.css'
-import api from '../../services/api'
 import { useParams } from 'react-router-dom'
 import StarRating from '../../components/StarRating/StarRating';
-import Favorite from '../../components/Favorite/Favorite';
 import { Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa";
 import NavBar from '../../components/NavBar/NavBar';
+import { useReducer } from 'react';
+import apiService from '../../services/apiService'
 
+const initializeState = {
+    movie: "",
+    error: ""
+};
 
-const MovieDetails = (props) => {
+function reducer(state, action) {
+    switch (action.type) {
+        case 'movie':
+            return {
+                ...state,
+                movie: action.payload
+            }
 
-    const [movie, setMovie] = useState("")
-    const [error, setError] = useState("")
+        case 'error':
+            return {
+                ...state,
+                error: action.payload
+            }
+        default:
+            return state;
+    }
+}
+
+const MovieDetails = () => {
+
+    const [state, dispatch] = useReducer(reducer, initializeState)
     const { id } = useParams();
-    
+
     const getMovie = async (id) => {
         try {
-            const token = localStorage.getItem('token')
-            const url = `/query/id/${id}`;
-            const response = await api.get(url, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            setMovie(response.data)
+            const movie = await apiService.getMovieId(id);
+            dispatch({ type: "movie", payload: movie })
         } catch (err) {
-            setError("Erro ao carregar filmes. Tente novamente.");
+            dispatch({ type: "error", payload: err.response?.data?.message || "Erro ao buscar o filme" })
         }
     }
-    
+
     useEffect(() => {
         getMovie(id);
-    }, []);
+    }, [id]);
 
     return (
         <div>
@@ -40,30 +55,30 @@ const MovieDetails = (props) => {
             <div className='movie-details'>
                 <Link className='movie-return' to="/"><FaArrowLeft /></Link>
                 <div className='poster'>
-                    <img src={`https://image.tmdb.org/t/p/w400${movie.poster}`} alt={movie.name} />
+                    <img src={`https://image.tmdb.org/t/p/w400${state.movie.poster}`} alt={state.movie.name} />
                 </div>
 
                 <div className='infos'>
 
                     <div className='infos-fav'>
-                        <h1>{movie.name}</h1>
+                        <h1>{state.movie.name}</h1>
                     </div>
 
                     <div className='movie-rating' >
-                        <StarRating voteAverage={movie.voteAverage} />
+                        <StarRating voteAverage={state.movie.voteAverage} />
                     </div>
 
-                    <p className='movie-runtime'>{movie.runtime} min</p>
+                    <p className='movie-runtime'>{state.movie.runtime} min</p>
                     <p className='movie-generos' >
-                        {movie.genres && movie.genres.length > 0
-                            ? movie.genres.map((genero, index) => (
+                        {state.movie.genres && state.movie.genres.length > 0
+                            ? state.movie.genres.map((genero, index) => (
                                 <span key={genero.id}>
                                     {genero.name}
-                                    {index < movie.genres.length - 1 && ', '}
+                                    {index < state.movie.genres.length - 1 && ', '}
                                 </span>
                             )) : 'Gêneros não disponíveis'}</p>
 
-                    <p className='movie-overview'>{movie.overview}</p>
+                    <p className='movie-overview'>{state.movie.overview}</p>
                 </div>
             </div>
         </div>

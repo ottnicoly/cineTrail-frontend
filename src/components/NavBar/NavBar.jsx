@@ -6,7 +6,7 @@ import { IconContext } from "react-icons";
 import Logout from '../Logout/Logout';
 import { TiHomeOutline } from "react-icons/ti";
 
-const NavBar = ({ search, setSearch }) => {
+const NavBar = (props) => {
 
     //caminha da url
     const location = useLocation()
@@ -22,8 +22,8 @@ const NavBar = ({ search, setSearch }) => {
                         <TextField
                             type="text"
                             name="Pesquise um filme..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
+                            value={props.search}
+                            onChange={props.setSearch}
                         />
 
                     </>}

@@ -4,32 +4,61 @@ import api from '../../services/api'
 import NavBar from '../../components/NavBar/NavBar'
 import MovieCard from '../../components/MovieCard/MovieCard'
 import { useReducer } from 'react';
+import apiService from '../../services/apiService'
+
+const initializeState = {
+    movies: [],
+    error: "",
+    search: "",
+    favoriteMovies: []
+};
+
+function reducer(state, action) {
+    switch (action.type) {
+        case "movies":
+            return {
+                ...state,
+                movies: action.payload
+            }
+        case "error":
+            return {
+                ...state,
+                error: action.payload
+            }
+        case "search":
+            return {
+                ...state,
+                search: action.payload
+            }
+        case "favoriteMovies":
+            return {
+                ...state,
+                favoriteMovies: action.payload
+            }
+    }
+}
 
 const MovieList = () => {
-    const [movies, setMovies] = useState([]);
-    const [error, setError] = useState("");
-    const [search, setSearch] = useState("");
-    const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+    const [state, dispatch] = useReducer(reducer, initializeState);
 
     const getMovies = async (query) => {
         try {
-            const token = localStorage.getItem('token');
-            const url = query ? `/query/name/${query}` : "/query/trending";
-            const response = await api.get(url, {
+            const movies = await apiService.getMovies();
+            const moviesName = await apiService.getMoviesName(query);
+            const response = await api.get(query ? moviesName : movies, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
             // some - verifica se o filme esta na lista de favoritos
             // spread operator - preserva as propriedades do filme
             const updatedMovies = response.data.map(movie => {
-                const isFavorite = favoriteMovies.some(favMovie => favMovie.idTmdb === movie.idTmdb);
+                const isFavorite = state.favoriteMovies.some(favMovie => favMovie.idTmdb === movie.idTmdb);
                 return { ...movie, isFavorite };
             });
-            setMovies(updatedMovies);
-            setError("");
+            dispatch({type: "movies", payload: updatedMovies})
         } catch (err) {
-            setError("Erro ao carregar filmes.");
-            setMovies([]);
+            dispatch({type: "error", payload: err.response?.data?.message || "Erro ao garregar filmes"})
         }
     };
 
@@ -39,11 +68,9 @@ const MovieList = () => {
             const response = await api.get("/favorite", {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            setFavoriteMovies(response.data);
-            setError("");
+            dispatch({type: "favoriteMovies", payload: response.data})
         } catch (err) {
-            setError("Erro ao carregar filmes.");
-            setFavoriteMovies([]);
+            dispatch({type: "error", payload: err.response?.data?.message || "Erro ao garregar filmes"})
         }
     };
 
@@ -52,38 +79,38 @@ const MovieList = () => {
     }, []);
 
     useEffect(() => {
-        if (favoriteMovies.length > 0) {
+        if (state.favoriteMovies.length > 0) {
             getMovies();
         }
-    }, [favoriteMovies]);
+    }, [state.favoriteMovies]);
 
     //resolver problema quando apaga o nome para voltar ao trending
-    function debounce (func, delay) {
-       let timeoutId;
-       return function (...args) {
-        clearTimeout(timeoutId);
-        
-        timeoutId = setTimeout(() => {
-            func.apply(this, args);
-        }, delay)
-       }
+    function debounce(func, delay) {
+        let timeoutId;
+        return function (...args) {
+            clearTimeout(timeoutId);
+
+            timeoutId = setTimeout(() => {
+                func.apply(this, args);
+            }, delay)
+        }
     }
 
-    const debounceSearch = useCallback(debounce((query) => getMovies(query), 500),[])
+    const debounceSearch = useCallback(debounce((query) => getMovies(query), 500), [])
 
     useEffect(() => {
-        if(search){
-            debounceSearch(search)
-        }else {
+        if (state.search) {
+            debounceSearch(state.search)
+        } else {
             getMovies()
         }
-    }, [search, debounceSearch]);
+    }, [state.search, debounceSearch]);
 
     return (
         <div>
-            <NavBar search={search} setSearch={setSearch} />
+            <NavBar search={state.search} setSearch={(e) => dispatch({type: "search", payload: e.target.value})} />
             <ul className='movie-list'>
-                {movies.map((movie) => (
+                {state.movies.map((movie) => (
                     <MovieCard
                         key={movie.idTmdb}
                         idTmdb={movie.idTmdb}

@@ -3,44 +3,70 @@ import React, { useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"
+import { useReducer } from 'react';
 import './Login.css'
 
+const initializeState = {
+  password: "",
+  login: "",
+  error: ""
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'password':
+      return {
+        ...state,
+        password: action.payload
+      }
+    case 'login':
+      return {
+        ...state,
+        login: action.payload
+      }
+    case 'error':
+      return {
+        ...state,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
 const Login = () => {
-    const [password, setPassword] = useState("")
-    const [login, setLogin] = useState("")
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      /* console.log("Enviando dados:", { login, password }); */
-      try {
-        const response = await api.post("/auth/login", { login, password });
-      /* console.log("Resposta do servidor:", response); */
-        localStorage.setItem("token", response.data.token);
-        navigate("/"); 
-      } catch (err) {
-      /* console.log("Erro ao fazer login:", err.response ? err.response.data : err); */
-        setError("Credenciais inválidas. Tente novamente.");
-      }};
-      
-    return (
-        <div className='login'>
-            <div className='form-login'>
-            {error && <p className="error-message">{error}</p>}
-            <Form 
-            onSubmit={handleSubmit}
-            formName='Login'
-            buttonName='Entrar'
-            loginValue={login}
-            onLoginChange={(e) => setLogin(e.target.value)}
-            passwordValue={password}
-            onPasswordChange={(e) => setPassword(e.target.value)}
-            />
-            <Link className='link-register' to={"/register"}>Registrar-se</Link>
-            </div>
-        </div> 
-    )
+  const [state, dispatch] = useReducer(reducer, initializeState)
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await api.post("/auth/login", { login: state.login, password: state.password, });
+      localStorage.setItem("token", response.data.token);
+      navigate("/");
+    } catch (err) {
+      (e) => dispatch({ type: "error", payload: err.response?.data?.message || "Erro desconhecido" })
+    }
+  };
+
+  return (
+    <div className='login'>
+      <div className='form-login'>
+        {state.error && <p className="error-message">{state.error}</p>}
+        <Form
+          onSubmit={handleSubmit}
+          formName='Login'
+          buttonName='Entrar'
+          loginValue={state.login}
+          onLoginChange={(e) => dispatch({ type: "login", payload: e.target.value })}
+          passwordValue={state.password}
+          onPasswordChange={(e) => dispatch({ type: "password", payload: e.target.value })}
+        />
+        <Link className='link-register' to={"/register"}>Registrar-se</Link>
+      </div>
+    </div>
+  )
 }
 
 export default Login
