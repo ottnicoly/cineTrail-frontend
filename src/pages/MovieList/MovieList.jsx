@@ -44,15 +44,12 @@ const MovieList = () => {
 
     const getMovies = async (query) => {
         try {
-            const movies = await apiService.getMovies();
-            const moviesName = await apiService.getMoviesName(query);
-            const response = await api.get(query ? moviesName : movies, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-
+            const movie = await apiService.getMovies();
+            // const moviesName = await apiService.getMoviesName(query);
+            // const response = await api.get(query ? moviesName : movies);
             // some - verifica se o filme esta na lista de favoritos
             // spread operator - preserva as propriedades do filme
-            const updatedMovies = response.data.map(movie => {
+            const updatedMovies = movie.map(movie => {
                 const isFavorite = state.favoriteMovies.some(favMovie => favMovie.idTmdb === movie.idTmdb);
                 return { ...movie, isFavorite };
             });
@@ -64,11 +61,8 @@ const MovieList = () => {
 
     const getFavoriteMovies = async () => {
         try {
-            const token = localStorage.getItem('token');
-            const response = await api.get("/favorite", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            dispatch({type: "favoriteMovies", payload: response.data})
+            const favoriteMovies = await apiService.getFavoriteMovies()
+            dispatch({type: "favoriteMovies", payload: favoriteMovies})
         } catch (err) {
             dispatch({type: "error", payload: err.response?.data?.message || "Erro ao garregar filmes"})
         }

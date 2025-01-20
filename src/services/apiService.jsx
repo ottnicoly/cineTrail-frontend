@@ -1,14 +1,11 @@
 import api from './api'
 
-const token = localStorage.getItem('token');
-
 const apiService = {
 
-    getMovies: async () => {
+    getMovies: async (e) => {
+        e.preventDefault()
         try {
-            const response = await api.get("/query/trending", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            const response = await api.get("/query/trending");
             return response.data;
         } catch (error) {
             return error;
@@ -17,9 +14,7 @@ const apiService = {
 
     getMoviesName: async (query) => {
         try {
-            const response = await api.get(`/query/name/${query}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            const response = await api.get(`/query/name/${query}`);
             return response.data;
         } catch (error) {
             return error;
@@ -28,29 +23,30 @@ const apiService = {
 
     getMovieId: async (id) => {
         try {
-            const response = await api.get(`/query/id/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            const response = await api.get(`/query/id/${id}`)
             return response.data;
         } catch (error) {
             throw error;
         }
     },
 
-    getFavoriteMovies : async () => {
+    getFavoriteMovies: async () => {
         try {
-            const response = await api.get(`/favorite`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })    
-           return response.data;
+            const response = await api.get(`/favorite`)
+            return response.data;
         } catch (error) {
-           return error;
+            return error;
+        }
+    },
+
+    register: async (login, password, role) => {
+        try {
+            await api.post("/auth/register", { login, password, role });
+        } catch (error) {
+            return error;
         }
     }
+
 }
 
 export default apiService;

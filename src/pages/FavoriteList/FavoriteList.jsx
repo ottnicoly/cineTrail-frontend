@@ -61,6 +61,7 @@ const FavoriteList = () => {
                     overview={movie.overview}
                     poster={movie.poster}
                     voteAverage={movie.voteAverage}
+
                 />
             )}</ul> : (
                 <div className='message-error'>
